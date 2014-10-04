@@ -7,7 +7,7 @@ class ApplicationController < ActionController::Base
   	artist.gsub!(/\s+/,'%20')
   	api_key = 'c0828cbf1521c0c4b7530aaee42ef105'
   	response = HTTParty.get("http://ws.audioscrobbler.com/2.0/?method=artist.search&artist=#{artist}&api_key=#{api_key}&limit=#{limit}&page=#{page}")
-  	data = response.to_s.scan(/"artist"=>\{"name"=>"([^"]+)"/)
-  	return data == [] ? nil : data[0][0]  	
+  	data = response.to_s.scan(/"artist"=>\{"name"=>"([^"]+)", "listeners"=>"([0-9]+)"/)
+  	return data[0] ## ["nombre_banda","listeners"]
   end
 end

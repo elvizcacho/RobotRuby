@@ -21,15 +21,16 @@ class HomeController < ApplicationController
    	 #Consulta API Last.fm
      response = buscar_banda(1,0,banda)# tomamos el primer resultado de la busqueda en Lastfm
      if response != nil #si el artista existe se le da formato para comparar
-     	response = response.downcase
-     	response.gsub!(/ /, '')
+     	nombre = response[0].downcase
+     	listeners = response[1].to_i
+     	nombre.gsub!(/ /, '')
      end
      #damos formato para comparar
      n = banda.gsub(/%20+/, '')
      n = n.downcase
      banda.gsub!(/%20+/, ' ')
      
-     return n == response
+     return (n == nombre && listeners > 20)
    end
 
 end
