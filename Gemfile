@@ -44,6 +44,14 @@ gem 'spring',        group: :development
 # Use debugger
 # gem 'debugger', group: [:development, :test]
 
+# Use bootstrap-sass
 gem 'bootstrap-sass', '~> 3.2.0.1'
+
+#Ruby version
 ruby "2.1.2"
+
+#For Heroku Deploying
 gem 'rails_12factor', group: :production
+
+#Httparty
+gem 'httparty'
