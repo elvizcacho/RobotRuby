@@ -4,6 +4,7 @@ module MyJob
     bandas = Banda.all.to_a
 		for banda in bandas
 			banda.actualizar_lastfm
+			banda.actualizar_spotify
 		end
   end
 end
