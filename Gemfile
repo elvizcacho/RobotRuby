@@ -55,3 +55,8 @@ gem 'rails_12factor', group: :production
 
 #Httparty
 gem 'httparty'
+
+# Job Scheduling
+gem 'redis', '>= 3.0.0'
+gem 'resque', :require => "resque/server" # background jobs
+gem 'resque-scheduler', '~> 2.0' # job scheduling
