@@ -1,2 +1,16 @@
-<h1>Home#index</h1>
-<p>Find me in app/views/home/index.html.erb</p>
+<h1>Tus Bandas</h1>
+<!-- Añadir banda para seguir estadisticas -->
+<div class="row">
+	<div class="col-md-4">
+		<%= form_tag("/home/crear",:class => "form") do %>
+			<div class="form-group">
+				<%= label_tag("Banda") %>
+				<%= text_field_tag("nombre","",:class => "form-control") %>
+			</div>
+	<%= submit_tag("Añadir banda",:class => "btn btn-primary") %>
+		<% end %>
+	</div>
+</div>
+<br>
+<!-- Estadisticas de las bandas -->
+<%= estadisticas_bandas(@bandas) %>
