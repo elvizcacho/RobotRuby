@@ -5,6 +5,7 @@ module MyJob
 		for banda in bandas
 			banda.actualizar_lastfm
 			banda.actualizar_spotify
+			banda.actualizar_likes
 		end
   end
 end

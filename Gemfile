@@ -60,3 +60,6 @@ gem 'httparty'
 gem 'redis', '>= 3.0.0'
 gem 'resque', :require => "resque/server" # background jobs
 gem 'resque-scheduler', '~> 2.0' # job scheduling
+
+#scrapping facebook
+gem 'mechanize'
