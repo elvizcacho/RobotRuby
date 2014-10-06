@@ -1,28 +1,32 @@
 == README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+<h1>Acid Prueba</h1>
 
 Things you may want to cover:
 
-* Ruby version
+* Ruby version: 2.1.2p95
+* Rails version: 4.1.4
 
 * System dependencies
+  Redis: 2.8.9
 
 * Configuration
 
 * Database creation
+  - Developement enviorement: sqlite3
+  - Production enviorement: postgres
 
 * Database initialization
+  just run rake:migrate.
 
 * How to run the test suite
 
 * Services (job queues, cache servers, search engines, etc.)
-
+  -resque
+  -resque-scheduler
+  
 * Deployment instructions
+  database: postgres
+  configure Redis
 
-* ...
 
-
-Please feel free to use a different markup language if you do not plan to run
-<tt>rake doc:app</tt>.
