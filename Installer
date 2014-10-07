@@ -1,0 +1,30 @@
+sudo apt-get install ruby-activesupport-4.0
+sudo apt-get install ruby-rack
+sudo apt-get install ruby-actionpack-4.0
+sudo apt-get install ruby-railties-4.0
+sudo apt-get install bundler
+sudo apt-get install curl
+curl -sSL https://get.rvm.io | bash -s stable
+source ~/.rvm/scripts/rvm
+rvm install ruby-2.1.2
+sudo apt-get install postgresql postgresql-contrib
+sudo apt-get install libpq-dev
+gem install pg
+sudo apt-get install nodejs
+bundle install
+sudo apt-get install build-essential
+sudo apt-get install tcl8.5
+wget http://download.redis.io/releases/redis-2.8.9.tar.gz
+tar xzf redis-2.8.9.tar.gz
+cd redis-2.8.9
+make
+make test
+sudo make install
+cd utils
+sudo ./install_server.sh
+sudo service redis_6379 start
+sudo update-rc.d redis_6379 defaults
+
+
+
+

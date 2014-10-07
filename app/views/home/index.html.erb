@@ -11,7 +11,13 @@
 		<% end %>
 	</div>
 </div>
-<br>
+<br/>
+<% if @quiso_decir != nil %>
+	<div class="quiso_decir">
+		<%= link_to("Quizás quiso decir: #{@quiso_decir.split.map(&:capitalize).join(' ')}",{:action => "crear",:nombre => @quiso_decir.split.map(&:capitalize).join(' ')},method: :post) %>
+		<br/><br/>
+	</div>
+<% end %>
 <!-- Estadisticas de las bandas -->
 <div id="content_tabla">
 	<%= render :partial => "tabla" %> <!--aca hago el render de la vista parcial del menu -->

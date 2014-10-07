@@ -2,12 +2,16 @@ class HomeController < ApplicationController
   
   def index
     @bandas = Banda.all.to_a
+    @quiso_decir = flash[:quiso_decir]
   end
 
   def crear
   	nombre_banda = params[:nombre]
-  	if bandaexiste?(params[:nombre])#si la banda existe en Last.fm la agrega
+    consulta = bandaexiste(params[:nombre])
+    if consulta == true #si la banda existe en Last.fm la agrega
   		Banda.create(:nombre => params[:nombre], :likes => 0, :spotify => 0, :lastfm => 0)
+    elsif consulta[:nombre_verdadero] #Si esta mal escrito muestra sugerencia
+      flash[:quiso_decir] = consulta[:nombre_verdadero]
     end
     redirect_to("/home/index")
   end
@@ -21,10 +25,12 @@ class HomeController < ApplicationController
     end
   end
 
-  def bandaexiste?(banda)
+  def bandaexiste(banda)
    	#Consulta API Last.fm
+    listeners = 0
     response = buscar_banda(1,0,banda)# tomamos el primer resultado de la busqueda en Lastfm
     if response != nil #si el artista existe se le da formato para comparar
+      nombre_v = response[0].downcase
      	nombre = response[0].downcase
      	listeners = response[1].to_i
      	nombre.gsub!(/ /, '')
@@ -33,8 +39,13 @@ class HomeController < ApplicationController
     n = banda.gsub(/%20+/, '')
     n = n.downcase
     banda.gsub!(/%20+/, ' ')
-     
-    return (n == nombre && listeners > 20)
+    if n == nombre && listeners > 20 #Banda existe y esta bien escrita
+      return true
+    elsif n != nombre && listeners > 20 #Banda existe pero esta mal escrita
+      return {:nombre_verdadero => nombre_v}
+    else
+      return {:nombre_verdadero => false}
+    end
   end
 
    def scrapping 
