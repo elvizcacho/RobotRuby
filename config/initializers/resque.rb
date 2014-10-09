@@ -2,8 +2,7 @@ require 'resque_scheduler'
 
 Resque.redis = ENV["REDISTOGO_URL"] ||= "redis://elvizcacho@gmail.com:serendipity@host:1234/"
 Resque.redis.namespace = "resque:SchedulerExample"
-uri = URI.parse(ENV["REDISTOGO_URL"])
-Resque.redis = Redis.new(:host =&gt; uri.host, :port =&gt; uri.port, :password =&gt; uri.password)
+
 
 
 # If you want to be able to dynamically change the schedule,
