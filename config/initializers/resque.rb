@@ -1,6 +1,6 @@
 require 'resque_scheduler'
 
-Resque.redis = 'localhost:6379'
+Resque.redis = 'redistogo:5f4bdedf810e0db9f93ac630e6b59bca@greeneye.redistogo.com:9767'
 Resque.redis.namespace = "resque:SchedulerExample"
 
 # If you want to be able to dynamically change the schedule,
