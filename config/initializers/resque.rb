@@ -1,6 +1,6 @@
 require 'resque_scheduler'
 
-Resque.redis = ENV["REDISTOGO_URL"] ||= "redis://elvizcacho@gmail.com:serendipity@host:1234/"
+Resque.redis = ENV["REDISTOGO_URL"]
 Resque.redis.namespace = "resque:SchedulerExample"
 
 
