@@ -1,6 +1,6 @@
 == README
 
-<h1>Acid Prueba</h1>
+Acid Prueba
 
 Things you may want to cover:
 
