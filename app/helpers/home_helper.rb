@@ -6,6 +6,7 @@ module HomeHelper
 		html += '<table class="table">'
 		html += '<tr>'
 		html += '<td class="text-left"><b>Nombre</b></td>'
+		html += '<td class="text-right"><b>Likes Chile</b></td>'
 		html += '<td class="text-right"><b>Facebook</b></td>'
 		html += '<td class="text-right"><b>Spotify</b></td>'
 		html += '<td class="text-right"><b>Last.fm</b></td>'
@@ -14,6 +15,7 @@ module HomeHelper
 		for banda in bandas_array
 			html += '<tr>'
 			html += '<td class="text-left">' + "#{banda.nombre}</td>"
+			html += '<td class="text-right">' + "#{banda.chile}</td>"
 			html += '<td class="text-right">' + "#{banda.likes}</td>"
 			html += '<td class="text-right">' + "#{banda.spotify}</td>"
 			html += '<td class="text-right">' + "#{banda.lastfm}</td>"

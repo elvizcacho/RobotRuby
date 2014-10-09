@@ -6,6 +6,7 @@ module MyJob
 			banda.actualizar_lastfm
 			banda.actualizar_spotify
 			banda.actualizar_likes
+			banda.actualizar_likes_chile
 		end
   end
 end
