@@ -1,4 +1,5 @@
 <h1>Tus Bandas</h1>
+<br/>
 <!-- Añadir banda para seguir estadisticas -->
 <div class="row">
 	<div class="col-md-4">
@@ -12,11 +13,13 @@
 	</div>
 </div>
 <br/>
-<% if @quiso_decir != nil %>
-	<div class="quiso_decir">
+<% if @quiso_decir != nil && @quiso_decir != 1%>
+	<div class="quiso_decir subrayado negrilla">
 		<%= link_to("Quizás quiso decir: #{@quiso_decir.split.map(&:capitalize).join(' ')}",{:action => "crear",:nombre => @quiso_decir.split.map(&:capitalize).join(' ')},method: :post) %>
 		<br/><br/>
 	</div>
+<% elsif @quiso_decir == 1%>
+	<p class="no-existe subrayado negrilla">El artista que usted busca no existe ó está mal escrito.</p>
 <% end %>
 <!-- Estadisticas de las bandas -->
 <div id="content_tabla">

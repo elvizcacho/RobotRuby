@@ -7,7 +7,7 @@ module HomeHelper
 		html += '<tr>'
 		html += '<td class="text-left"><b>Nombre</b></td>'
 		html += '<td class="text-right"><b>Likes Chile</b></td>'
-		html += '<td class="text-right"><b>Facebook</b></td>'
+		html += '<td class="text-right"><b>Facebook Fan Page</b></td>'
 		html += '<td class="text-right"><b>Spotify</b></td>'
 		html += '<td class="text-right"><b>Last.fm</b></td>'
 		html += '<td class="text-center"><b>Eliminar</b></td>'

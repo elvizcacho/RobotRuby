@@ -12,6 +12,8 @@ class HomeController < ApplicationController
   		Banda.create(:nombre => params[:nombre], :likes => 0, :spotify => 0, :lastfm => 0)
     elsif consulta[:nombre_verdadero] #Si esta mal escrito muestra sugerencia
       flash[:quiso_decir] = consulta[:nombre_verdadero]
+    else
+      flash[:quiso_decir] = 1
     end
     redirect_to("/home/index")
   end
@@ -29,16 +31,16 @@ class HomeController < ApplicationController
    	#Consulta API Last.fm
     listeners = 0
     response = buscar_banda(1,0,banda)# tomamos el primer resultado de la busqueda en Lastfm
+
     if response != nil #si el artista existe se le da formato para comparar
       nombre_v = response[0].downcase
      	nombre = response[0].downcase
      	listeners = response[1].to_i
-     	nombre.gsub!(/ /, '')
+     	nombre.gsub!(/\s+/, '')
     end
     #damos formato para comparar
-    n = banda.gsub(/%20+/, '')
+    n = banda.gsub(/\s+/, '')
     n = n.downcase
-    banda.gsub!(/%20+/, ' ')
     if n == nombre && listeners > 20 #Banda existe y esta bien escrita
       return true
     elsif n != nombre && listeners > 20 #Banda existe pero esta mal escrita
@@ -47,29 +49,5 @@ class HomeController < ApplicationController
       return {:nombre_verdadero => false}
     end
   end
-
-   def scrapping 
-    #Scrapping Facebook para obtener los likes solo de Chile
-    #mechanize = Mechanize.new { |agent|
-    #  agent.follow_meta_refresh = true
-    #}
-
-    #Login Facebook
-    #page = mechanize.get('https://www.facebook.com/advertising')
-    #form = page.forms.first #busco el primer form
-    #form['email'] = 'acidprueba@gmail.com' #credenciales de acceso a facebook
-    #form['pass'] = 'acidprueba77'
-    #ads_home = page.form.submit  #envio el form
-    #links = ads_home.links_with(:class => "_42ft _42fu selected _42gz") #obtengo el link que me lleva a crear un nuevo Ad
-    #links[0].click #voy a crear nuevo Ad
-    #page_id = mechanize.get("https://graph.facebook.com/search?access_token=CAACZBzNhafycBAMYmqgXjYQAoq5SYwd2hN2h8iVZAMPXKWbGX9UeEuc3ll7l0nrzQ9GhIlyatWfIzl9ZCtALWZBNDNx7ZAbpeNT1LLDIVaUecvWVEn5XCstqOTBuBWogYcZCfXmguSCAwVhL8MseZCZBivs8ymsN0QXAcgvhpfqSXImXzYwi1WLOP0uXSHTJgRxlNJJtlNPaZAMYyGtvdjhXM&callback=__globalCallbacks.f4bb08abc&endpoint=%2Fsearch&locale=en_US&method=get&pretty=0&q=Nirvana&type=adInterest")
-    ##LA LUZ##
-    
-    
-    ##############ADS API#####################
-    #GET TOKEN TO USE AD API: https://graph.facebook.com/oauth/access_token?client_id=313760365477283&redirect_uri=http://0.0.0.0:3000/&client_secret=b0eb3610944a84a9db9088678965b9c6&code=AQAWiYi1QPCd5KewTv6sW6tPp-8u2wctxxfPuAf1XhfPCOqgsHX_MV5kH3_4AM6XHraqbMNgXNxnhUW3VqhGVOXxtLT7E-2ekgtB3uaHxGg3wRSH_mr1MGaU3JRryLqLczp-06V9yG06av1aLmHL5dV9I0kcrplQDRWSGBsmt3R6cKYccN0ZdRq6Ire54hRKQTQWQSkfL87HtG4x-ZBioffkGN2tBzKCyzrYS9DlsqnHrqMWIBixsaAI1VHQHM9pIpe4GVeXGnY7HH-RNGsV4cZlUCUu3c_o5CyoBv6Xmil6vo8CX1QWxlZeQi7DJ6f4tjM#_=_
-    #TOKEN: CAAEdXQcgZCaMBAFjxiYslYgKwZA7t6FePskHG9MN9KZAUL4HTV8Vd1FTWbvAH9VRSDpbOeY9thUIcr9TQxXUiM6MZCcrQiVZAcOKuXdmv9I7xFbxr7GULnbDuZCLF5mMlJyh5YN7ITgHXfi1TtQas8dHUytJ85nYPknyjDABq5xNzYWo3T8ZAg8Q2ZAfve85y0I846cBONYNgsydAk79PWVq&expires=5183836
-    ##Debo pedir permiso a facebook llenando un formulario para poder usar la Ads API
-   end
 
 end

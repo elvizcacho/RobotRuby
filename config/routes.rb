@@ -2,7 +2,6 @@ Rails.application.routes.draw do
   get 'home/index'
   post 'home/crear'
   post 'home/eliminar'
-  get 'home/scrapping'
   
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
