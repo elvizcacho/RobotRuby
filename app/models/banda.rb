@@ -46,12 +46,14 @@ class Banda < ActiveRecord::Base
 
   def actualizar_likes_chile
     artist = self.nombre #obtenemos nombre de banda
-    response_id = HTTParty.get("https://graph.facebook.com/search?access_token=CAACZBzNhafycBAMYmqgXjYQAoq5SYwd2hN2h8iVZAMPXKWbGX9UeEuc3ll7l0nrzQ9GhIlyatWfIzl9ZCtALWZBNDNx7ZAbpeNT1LLDIVaUecvWVEn5XCstqOTBuBWogYcZCfXmguSCAwVhL8MseZCZBivs8ymsN0QXAcgvhpfqSXImXzYwi1WLOP0uXSHTJgRxlNJJtlNPaZAMYyGtvdjhXM&callback=__globalCallbacks.f4bb08abc&endpoint=%2Fsearch&locale=en_US&method=get&pretty=0&q=" + URI.escape("#{artist}") + "&type=adInterest")
+    #token se vence despues de unos dias #pendiente por calcular periodicidad del token
+    token = 'CAACZBzNhafycBAI1swImmeM4kSUZCBoXwSRcfhQfWMDlhJ7Qao68f9NHCyaWaI4lNxaIgRiKooZBIXO9NC7yiQD0uYLaTwwfquZAXQpU1DeKmAddUxEEEVDut0UgKIB2WVjJ0B9xH0vFIRKTFwZBceZAsuJPQiRK6mQZA6ENnYtVOGZCMi92bIEdPtPaSqbZC18dIxGJKArKLoZAn9edMJanlaZC5mHvCbZCFboZD'
+    response_id = HTTParty.get("https://graph.facebook.com/search?access_token=#{token}&callback=__globalCallbacks.f4bb08abc&endpoint=%2Fsearch&locale=en_US&method=get&pretty=0&q=" + URI.escape("#{artist}") + "&type=adInterest")
     data = response_id.to_s.scan(/"id":(\d+)/) #parseamos el response de la API
     if data[0] != nil #en caso de que no devuelva ningun id
       id_searcher = data[0][0] #extraemos el primer ID
     end
-    response_data = HTTParty.get("https://graph.facebook.com/act_1469630386636799/reachestimate?access_token=CAACZBzNhafycBAMYmqgXjYQAoq5SYwd2hN2h8iVZAMPXKWbGX9UeEuc3ll7l0nrzQ9GhIlyatWfIzl9ZCtALWZBNDNx7ZAbpeNT1LLDIVaUecvWVEn5XCstqOTBuBWogYcZCfXmguSCAwVhL8MseZCZBivs8ymsN0QXAcgvhpfqSXImXzYwi1WLOP0uXSHTJgRxlNJJtlNPaZAMYyGtvdjhXM&accountId=1469630386636799&bid_for=%5B%22conversion%22%5D&callback=__globalCallbacks.f1864d5f48&currency=COP&endpoint=%2Fact_1469630386636799%2Freachestimate&locale=en_US&method=get&pretty=0&targeting_spec=%7B%22age_max%22%3A65%2C%22age_min%22%3A18%2C%22interests%22%3A%5B%7B%22id%22%3A%22#{id_searcher}%22%2C%22name%22%3A%22" + URI.escape("#{artist}") + "%22%7D%5D%2C%22excluded_connections%22%3A%5B%7B%22id%22%3A%22720613074687769%22%2C%22name%22%3A%22AcidSearcher%22%7D%5D%2C%22geo_locations%22%3A%7B%22countries%22%3A%5B%22CL%22%5D%7D%7D")
+    response_data = HTTParty.get("https://graph.facebook.com/act_1469630386636799/reachestimate?access_token=#{token}&accountId=1469630386636799&bid_for=%5B%22conversion%22%5D&callback=__globalCallbacks.f1864d5f48&currency=COP&endpoint=%2Fact_1469630386636799%2Freachestimate&locale=en_US&method=get&pretty=0&targeting_spec=%7B%22age_max%22%3A65%2C%22age_min%22%3A18%2C%22interests%22%3A%5B%7B%22id%22%3A%22#{id_searcher}%22%2C%22name%22%3A%22" + URI.escape("#{artist}") + "%22%7D%5D%2C%22excluded_connections%22%3A%5B%7B%22id%22%3A%22720613074687769%22%2C%22name%22%3A%22AcidSearcher%22%7D%5D%2C%22geo_locations%22%3A%7B%22countries%22%3A%5B%22CL%22%5D%7D%7D")
     data = response_data.to_s.scan(/"users":(\d+),"bid_estimations"/) #parseamos el response de la API
     if data[0] != nil #en caso de que no devuelva ningun resultado
       likes_chile = data[0][0] #extraemos la cantidad de personas que les gusta la banda en Chile
