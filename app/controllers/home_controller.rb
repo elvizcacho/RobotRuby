@@ -13,7 +13,7 @@ class HomeController < ApplicationController
     elsif consulta[:nombre_verdadero] #Si esta mal escrito muestra sugerencia
       flash[:quiso_decir] = consulta[:nombre_verdadero]
     else
-      flash[:quiso_decir] = 1
+      flash[:quiso_decir] = 1 #La banda no existe
     end
     redirect_to("/home/index")
   end
@@ -46,7 +46,7 @@ class HomeController < ApplicationController
     elsif n != nombre && listeners > 20 #Banda existe pero esta mal escrita
       return {:nombre_verdadero => nombre_v}
     else
-      return {:nombre_verdadero => false}
+      return {:nombre_verdadero => false} #La banda no existe
     end
   end
 

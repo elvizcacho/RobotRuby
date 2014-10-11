@@ -1,3 +1,7 @@
+#Este documento contiene todos los conmandos necesarios para instalar
+#la app en caso de no tener instalado las dependencias necesarias. 
+#Probado en Ubunto 14 LTS
+
 sudo apt-get install ruby-activesupport-4.0
 sudo apt-get install ruby-rack
 sudo apt-get install ruby-actionpack-4.0
