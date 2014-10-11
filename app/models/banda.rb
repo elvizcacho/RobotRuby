@@ -46,8 +46,28 @@ class Banda < ActiveRecord::Base
 
   def actualizar_likes_chile
     artist = self.nombre #obtenemos nombre de banda
-    #token se vence despues de unos dias #pendiente por calcular periodicidad del token
-    token = 'CAACZBzNhafycBAI1swImmeM4kSUZCBoXwSRcfhQfWMDlhJ7Qao68f9NHCyaWaI4lNxaIgRiKooZBIXO9NC7yiQD0uYLaTwwfquZAXQpU1DeKmAddUxEEEVDut0UgKIB2WVjJ0B9xH0vFIRKTFwZBceZAsuJPQiRK6mQZA6ENnYtVOGZCMi92bIEdPtPaSqbZC18dIxGJKArKLoZAn9edMJanlaZC5mHvCbZCFboZD'
+
+    #Scraping Facebook para obtener los likes solo de Chile
+    mechanize = Mechanize.new { |agent|
+      agent.follow_meta_refresh = true
+    }
+
+    #Login Facebook
+    page = mechanize.get('https://www.facebook.com/advertising')
+    form = page.forms.first #busco el primer form
+    form['email'] = 'acidprueba@gmail.com' #credenciales de acceso a facebook
+    form['pass'] = 'acidprueba77'
+    ads_home = page.form.submit  #envio el form
+    links = ads_home.links_with(:class => "_42ft _42fu selected _42gz") #obtengo el link que me lleva a crear un nuevo Ad
+    ads_options = links[0].click #voy a crear nuevo Ad
+    body = ads_options.body.to_s #obtengo el body del response
+    data = body.scan(/"access_token":"([^"]+)"/) #Dentro del body busco el token de acceso
+    #Este token solo sera valido por unas cuantas horas, por ende siempre lo genero cada vez que
+    #voy a buscar los likes de Chile, de esta forma puedo usar la Ads API sin registro y 
+    #sin mantener una sesion en Facebook /¡Que buen Hack! =)/
+    token = data[0][0]
+    
+    #Obtenemos el id de la busqueda
     response_id = HTTParty.get("https://graph.facebook.com/search?access_token=#{token}&callback=__globalCallbacks.f4bb08abc&endpoint=%2Fsearch&locale=en_US&method=get&pretty=0&q=" + URI.escape("#{artist}") + "&type=adInterest")
     data = response_id.to_s.scan(/"id":(\d+)/) #parseamos el response de la API
     if data[0] != nil #en caso de que no devuelva ningun id
