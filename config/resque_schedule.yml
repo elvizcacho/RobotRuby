@@ -1,5 +1,5 @@
 do_my_job:
-  every: 5m
+  every: 59m
   class: MyJob
   args:
   description: Se actualizan los datos
