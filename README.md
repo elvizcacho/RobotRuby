@@ -1,7 +1,7 @@
 # Robot developed on Ruby
 
 
-<p style='text-align: justify;'>This project consolidates the social media information of an artist. You add an artist then this application seeks for this one on the Last.fm API, if the artist exists, this one is added to the database and the listeners from Last.m, the popularity of Spootify, the "likes" of Facebook Fan Page and the "likes" only from Chile of this artist are shown in a table which is updated each hour.</p> 
+This project consolidates the social media information of an artist. You add an artist then this application seeks for this one on the Last.fm API, if the artist exists, this one is added to the database and the listeners from Last.m, the popularity of Spootify, the "likes" of Facebook Fan Page and the "likes" only from Chile of this artist are shown in a table which is updated each hour. 
 
 I used the respective APIs to get the information of Last.fm, Spotify and the "likes" from a Facebook Fan Page. However, getting the "Facebook's likes" only from Chile of an artist was not so easy. I had to program a robot to use the Facebook ads console to get this information (_scraping data from Facebook_). I realized which are the requests that Facebook does in order to get this data via Ajax and I programmed a robot which is able to log into facebook, goes to the Facebook Ads console, gets an access token which Facebook uses to send requests. Then, the robot imitates what facebook does to get the information that I needed.
 
