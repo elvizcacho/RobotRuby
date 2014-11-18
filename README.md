@@ -24,6 +24,5 @@ I know, I could have done this easier with the Facebook Ads API, nevertheless, y
   - Production enviorement: postgres
 
 
-  Sebastian Vizcaino
-  
+  Sebastian Vizcaino\n
   elvizcacho@gmail.com
