@@ -14,26 +14,15 @@ I know, I could have done this easier with the Facebook Ads API, nevertheless, y
   - Redis: 2.8.9
   - Postgress: 9.3
 
-* Gems
+* Featured gems
+  - redis
   - resque
   - resque-scheduler
 
-* Configuration
-
-* Database creation
+* Database
   - Developement enviorement: sqlite3
   - Production enviorement: postgres
 
-* Database initialization
-  just run rake:migrate.
 
-* Services
-  -resque
-  -resque-scheduler
-  run: rake
-  
-* Deployment instructions
-  database: postgres
-  configure Redis
-
-
+  Sebastian Vizcaino
+  elvizcacho@gmail.com
