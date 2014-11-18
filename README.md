@@ -10,11 +10,13 @@ I know, I could have done this easier with the Facebook Ads API, nevertheless, y
 
 * System dependencies
 
-* Ruby version: 2.1.2p95
+* Ruby version: 2.1.2
 * Rails version: 4.1.4
 * Redis: 2.8.9
-* resque
-* resque-scheduler
+
+* Gems
+  - resque
+  - resque-scheduler
 
 * Configuration
 
